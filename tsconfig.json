@@ -6,7 +6,8 @@
     "lib": [
       "esnext",
       "esnext.asynciterable",
-      "dom"
+      "dom",
+      "ES2019"
     ],
     "esModuleInterop": true,
     "allowJs": true,

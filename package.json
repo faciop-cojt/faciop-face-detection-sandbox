@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.0",
-    "nuxt": "^2.0.0"
+    "@types/three": "^0.103.2",
+    "nuxt": "^2.0.0",
+    "three": "^0.117.1"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^1.0.2"
