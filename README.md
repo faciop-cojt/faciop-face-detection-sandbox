@@ -1,22 +1,13 @@
-# faciop-facial-sandbox
+# faciop facial sandbox
 
-> My awesome Nuxt.js project
+## About
 
-## Build Setup
+COJTのプロジェクトの一つ。facemeshとthree.jsを使って簡易的なARフィルターを作るための実験用プロジェクト。
 
-```bash
-# install dependencies
-$ yarn install
+## Environment
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+## Install & Usage
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+## Contact
 
-# generate static project
-$ yarn generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+なにかございましたら[こちらのTwitterアカウント](https://twitter.com/ninisan_drumath)にご連絡いただけると幸いです。
