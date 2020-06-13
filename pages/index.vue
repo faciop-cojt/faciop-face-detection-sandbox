@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <nuxt-link to="/facemesh-test">to facemesh-test page </nuxt-link>
     <div>
       <logo />
       <h1 class="title">

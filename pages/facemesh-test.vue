@@ -1,6 +1,7 @@
 <template>
   <div>
     Hello, {{name}}
+    <nuxt-link to="/">to index page </nuxt-link>
   </div>
 </template>
 
