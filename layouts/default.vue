@@ -1,7 +1,9 @@
 <template>
   <div>
-    <three-canvas />
+    <div id="canvas-wrapper"><three-canvas /></div>
+    <div id="nuxt-proj-wrapper">
     <nuxt />
+    </div>
   </div>
 </template>
 
@@ -27,6 +29,16 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+#canvas-wrapper {
+  position: relative;
+  z-index: -10;
+}
+
+#nuxt-proj-wrapper {
+  position: relative;
+  z-index: 1;
 }
 
 *,
