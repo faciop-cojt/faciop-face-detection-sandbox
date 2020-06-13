@@ -1,8 +1,20 @@
 <template>
   <div>
+    <three-canvas />
     <nuxt />
   </div>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import ThreeCanvas from '../components/ThreeCanvas.vue'
+
+export default Vue.extend({
+  components: {
+    ThreeCanvas
+  }
+})
+</script>
 
 <style>
 html {
