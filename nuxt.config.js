@@ -1,5 +1,13 @@
 
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: { 
+    base: '/faciop-face-detection-sandbox/'
+  }
+}:{}
+
 export default {
+  ...routerBase,
+  
   mode: 'spa',
   /*
   ** Headers of the page
@@ -44,7 +52,6 @@ export default {
   ** Build configuration
   */
   build: {
-    publicPath: 'public/',
     /*
     ** You can extend webpack config here
     */
@@ -52,11 +59,4 @@ export default {
     }
   },
 
-  generate: {
-    publicPath: 'public/',
-    routes: [
-      '/',
-      '/facemesh-test'
-    ]
-  }
 }
