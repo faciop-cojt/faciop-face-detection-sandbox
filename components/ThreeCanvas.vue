@@ -17,8 +17,9 @@ export default Vue.extend({
     };
   },
   mounted() {
-    this.artwork = new TestCanvas(<HTMLCanvasElement>this.$refs.canvas);
-    this.artwork.loop();
+    if(!this.artwork){
+      this.artwork = new TestCanvas(<HTMLCanvasElement>this.$refs.canvas);
+    }
   }
 });
 </script>
