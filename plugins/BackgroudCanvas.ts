@@ -17,8 +17,8 @@ export class BackgroudCanvas {
       0.1,
       100
     );
-    
-    this.renderer = new THREE.WebGLRenderer;
+
+    this.renderer = new THREE.WebGLRenderer();
 
     this.camera.position.set(0, 3, -10);
     this.camera.lookAt(this.scene.position);
@@ -26,7 +26,7 @@ export class BackgroudCanvas {
     const ambientLight = new THREE.AmbientLight("##fff", 0.5);
     this.scene.add(ambientLight);
 
-    const light = new THREE.DirectionalLight("#fff", .7);
+    const light = new THREE.DirectionalLight("#fff", 0.7);
     light.position.set(-2, 2, -2);
     this.scene.add(light);
 
@@ -50,6 +50,8 @@ export class BackgroudCanvas {
       antialias: true,
       canvas: canvas
     });
+    this.renderer.setClearColor("#8ed7d7");
+    this.renderer.setSize(this.size.width, this.size.height);
   }
 
   loop() {
@@ -70,6 +72,6 @@ declare module "vue/types/vue" {
   }
 }
 
-export default ({app}:{app:any}, inject:any) =>{
-  inject('backgroundCanvas', new BackgroudCanvas())
-}
+export default ({ app }: { app: any }, inject: any) => {
+  inject("backgroundCanvas", new BackgroudCanvas());
+};
