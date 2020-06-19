@@ -11,6 +11,9 @@ type DataType = {
 };
 
 export default Vue.extend({
+  // plugins: ['~/plugins/3DObjCanvas.ts'],
+  plugins: ['../plugins/test-plugins'],
+
   data(): DataType {
     return {
       artwork: null
@@ -20,6 +23,9 @@ export default Vue.extend({
     if(this.artwork == null) {
       this.artwork = new TestCanvas(<HTMLCanvasElement>this.$refs.canvas);
     }
+  },
+  created() {
+    this.$sayHello("plugin function");
   }
 });
 </script>
