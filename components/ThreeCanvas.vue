@@ -11,8 +11,7 @@ type DataType = {
 };
 
 export default Vue.extend({
-  // plugins: ['~/plugins/3DObjCanvas.ts'],
-  plugins: ['../plugins/test-plugins'],
+  // plugins: ['~/plugins/TestPlugin.ts'],
 
   data(): DataType {
     return {
@@ -25,7 +24,7 @@ export default Vue.extend({
     }
   },
   created() {
-    this.$sayHello("plugin function");
+    let t = this.$testPlugin.testPlugin("plugin");
   }
 });
 </script>

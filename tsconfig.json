@@ -27,7 +27,6 @@
     "types": [
       "@types/node",
       "@nuxt/types",
-      "test-plugins"
     ]
   },
   "exclude": [

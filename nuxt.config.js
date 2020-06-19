@@ -36,7 +36,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '@/plugins/test-plugins'}
+    {src: '~/plugins/TestPlugin.ts'}
   ],
   /*
   ** Nuxt.js dev-modules
