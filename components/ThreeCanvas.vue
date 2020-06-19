@@ -4,14 +4,14 @@
 
 <script lang="ts">
 import Vue from "vue";
-import TestCanvas from "./src/TestCanvas";
+import { BackgroudCanvas } from "../plugins/BackgroudCanvas";
+import { log } from "three";
 
 type DataType = {
-  artwork: TestCanvas | null;
+  artwork: BackgroudCanvas | null;
 };
 
 export default Vue.extend({
-  // plugins: ['~/plugins/TestPlugin.ts'],
 
   data(): DataType {
     return {
@@ -20,13 +20,14 @@ export default Vue.extend({
   },
   mounted() {
     if(this.artwork == null) {
-      this.artwork = new TestCanvas(<HTMLCanvasElement>this.$refs.canvas);
+      this.artwork = this.$backgroundCanvas;
+      console.log(this.artwork);
+      
+      this.artwork.initRenderer(<HTMLCanvasElement>this.$refs.canvas);
+      this.artwork.loop();
     }
-  },
-  created() {
-    let t = this.$testPlugin.testPlugin("plugin");
   }
-});
+})
 </script>
 
 <style lang="scss" scoped>
