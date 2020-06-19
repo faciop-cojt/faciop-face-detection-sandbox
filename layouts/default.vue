@@ -2,26 +2,29 @@
   <div>
     <div id="canvas-wrapper"><three-canvas /></div>
     <div id="nuxt-proj-wrapper">
-    <nuxt />
+      <facemesh-video />
+      <nuxt />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import ThreeCanvas from '../components/ThreeCanvas.vue'
+import Vue from "vue";
+import ThreeCanvas from "../components/ThreeCanvas.vue";
+import FacemeshVideo from "../components/FacemeshVideo.vue";
 
 export default Vue.extend({
   components: {
-    ThreeCanvas
+    ThreeCanvas,
+    FacemeshVideo
   }
-})
+});
 </script>
 
 <style>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
