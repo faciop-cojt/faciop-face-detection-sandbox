@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import FacemeshVideo from '~/plugins/FacemeshVideoObject'
+import {FacemeshVideo} from '~/plugins/FacemeshVideoObject'
 
 export default Vue.extend({
   data(){
