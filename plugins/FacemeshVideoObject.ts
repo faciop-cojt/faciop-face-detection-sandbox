@@ -1,4 +1,4 @@
-export class FacemeshVideo {
+export default class FacemeshVideo {
   size: { w: number; h: number };
   resolution: { w: number; h: number };
   autoplay: boolean;
@@ -28,8 +28,8 @@ export class FacemeshVideo {
   }
 
   initVideoObject(video: HTMLVideoElement) {
-    video.width = this.resolution.w;
-    video.height = this.resolution.h;
+    video.width = this.size.w;
+    video.height = this.size.h;
     video.autoplay = this.autoplay;
 
     this.getWebCamStream().then(stream=>{
