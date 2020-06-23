@@ -26,4 +26,14 @@ export class FacemeshVideo {
       }
     });
   }
+
+  initVideoObject(video: HTMLVideoElement) {
+    video.width = this.resolution.w;
+    video.height = this.resolution.h;
+    video.autoplay = this.autoplay;
+
+    this.getWebCamStream().then(stream=>{
+      video.srcObject = stream;
+    })
+  }
 }
