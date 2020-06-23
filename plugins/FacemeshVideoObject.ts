@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from "vue";
 
 export class FacemeshVideo {
   size: { w: number; h: number };
@@ -20,22 +20,21 @@ export class FacemeshVideo {
   }
 
   getWebCamStream(): Promise<MediaStream> {
-    navigator.mediaDevices.enumerateDevices()
-    .then((devices)=>{
-      devices.forEach((device)=>{
+    navigator.mediaDevices.enumerateDevices().then(devices => {
+      devices.forEach(device => {
         console.log("Hello");
-        
+
         console.log(device.deviceId, device.label);
-        
-      })
-    })
-    
+      });
+    });
+
     return navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
         width: { ideal: this.resolution.w },
         height: { ideal: this.resolution.h },
-        deviceId: "13b3f5df683da62be8c9420de88d49cf681a769a642ec1d02667feab43731eed",
+        deviceId:
+          "13b3f5df683da62be8c9420de88d49cf681a769a642ec1d02667feab43731eed",
         facingMode: "user"
       }
     });
@@ -46,9 +45,11 @@ export class FacemeshVideo {
     video.height = this.size.h;
     video.autoplay = this.autoplay;
 
-    this.getWebCamStream().then(stream=>{
-      video.srcObject = stream;
-    }).catch(err => console.log(err));
+    this.getWebCamStream()
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(err => console.log(err));
   }
 }
 
