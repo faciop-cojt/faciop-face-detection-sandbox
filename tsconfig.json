@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "skipLibCheck": true,
+    "checkJs": false,
     "target": "es2018",
     "module": "esnext",
     "moduleResolution": "node",
@@ -27,11 +29,11 @@
     "types": [
       "@types/node",
       "@nuxt/types",
-    ]
+    ],
   },
   "exclude": [
     "node_modules",
     ".nuxt",
     "dist"
-  ]
+  ],
 }
