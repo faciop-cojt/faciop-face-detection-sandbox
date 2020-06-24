@@ -1033,6 +1033,12 @@
   dependencies:
     "@tensorflow-models/blazeface" "0.0.5"
 
+"@tensorflow/tfjs-backend-wasm@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@tensorflow/tfjs-backend-wasm/-/tfjs-backend-wasm-2.0.1.tgz#6551b3bd1de7079a481750e9dafeb59555261086"
+  dependencies:
+    "@types/emscripten" "~0.0.34"
+
 "@tensorflow/tfjs-converter@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@tensorflow/tfjs-converter/-/tfjs-converter-2.0.1.tgz#0696455e6b6ed14e6f5f9cd937f8f2015a16569f"
@@ -1120,6 +1126,10 @@
   resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.33.tgz#31610c901eca573b8713c3330abc6e6b9f588546"
   dependencies:
     "@types/node" "*"
+
+"@types/emscripten@~0.0.34":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@types/emscripten/-/emscripten-0.0.34.tgz#12b4a344274fb102ff2f6c877b37587bc3e46008"
 
 "@types/etag@^1.8.0":
   version "1.8.0"
