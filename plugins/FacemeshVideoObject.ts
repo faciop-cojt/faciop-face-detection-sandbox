@@ -33,8 +33,7 @@ export class FacemeshVideo {
       video: {
         width: { ideal: this.resolution.w },
         height: { ideal: this.resolution.h },
-        deviceId:
-          "13b3f5df683da62be8c9420de88d49cf681a769a642ec1d02667feab43731eed",
+        deviceId: "13b3f5df683da62be8c9420de88d49cf681a769a642ec1d02667feab43731eed",
         facingMode: "user"
       }
     });
