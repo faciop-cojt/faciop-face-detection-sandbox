@@ -4,11 +4,13 @@ export class FacemeshVideo {
   size: { w: number; h: number };
   resolution: { w: number; h: number };
   autoplay: boolean;
+  inited: boolean;
 
   constructor() {
     this.size = { w: 360, h: 240 };
     this.resolution = { w: 1920, h: 1080 };
     this.autoplay = true;
+    this.inited = false;
   }
 
   setSize(size: { w: number; h: number }) {
@@ -47,6 +49,7 @@ export class FacemeshVideo {
     this.getWebCamStream()
       .then(stream => {
         video.srcObject = stream;
+        this.inited = true;
       })
       .catch(err => console.log(err));
   }

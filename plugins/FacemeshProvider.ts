@@ -1,4 +1,7 @@
 import * as facemesh from "@tensorflow-models/facemesh";
+import * as tf from "@tensorflow/tfjs-core"
+// import * as tfjsWasm from "@tensorflow/"
+// import Stats from "stats.js"
 
 import Vue from "vue";
 
