@@ -14,7 +14,11 @@
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.0",
-    "@tensorflow-models/facemesh": "^0.0.3",
+    "@tensorflow-models/facemesh": "0.0.1",
+    "@tensorflow/tfjs-backend-wasm": "^1.5.2-alpha1",
+    "@tensorflow/tfjs-converter": "^1.6.1",
+    "@tensorflow/tfjs-core": "^1.6.1",
+    "@types/stats.js": "^0.17.0",
     "@types/three": "^0.103.2",
     "cross-env": "^7.0.2",
     "install": "^0.13.0",
@@ -23,6 +27,7 @@
     "nuxt": "^2.0.0",
     "push-dir": "^0.4.1",
     "sass-loader": "^8.0.2",
+    "stats.js": "^0.17.0",
     "three": "^0.117.1"
   },
   "devDependencies": {
