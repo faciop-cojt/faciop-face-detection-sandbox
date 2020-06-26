@@ -1,30 +1,39 @@
 import * as facemesh from "@tensorflow-models/facemesh";
-import * as tf from "@tensorflow/tfjs-core"
-import * as tfjsWasm from "@tensorflow/tfjs-backend-wasm"
-import Stats from "stats.js"
+import * as tf from "@tensorflow/tfjs-core";
+import * as tfjsWasm from "@tensorflow/tfjs-backend-wasm";
+import Stats from "stats.js";
+
+import { version } from "@tensorflow/tfjs-backend-wasm/dist/version";
 
 import Vue from "vue";
 
 export class FacemeshProvider {
   model: Promise<facemesh.FaceMesh>;
-  stats: Stats
+  stats: Stats;
 
   constructor() {
-    this.model = facemesh.load();
+    this.model = facemesh.load({maxFaces: 1});
     this.stats = new Stats();
-    tf.setBackend('wasm');
+    console.log(version);
+    
+    tfjsWasm.setWasmPath(
+      `https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@${version}/dist/tfjs-backend-wasm.wasm`,
+      true
+    );
+    tf.setBackend("wasm");
   }
 
   getFacemeshPoints(video: HTMLVideoElement) {
-    this.stats.begin();
     this.model.then(model => {
-      model.estimateFaces(video)
-      .then(prediction=>{
+      model.estimateFaces(video).then(prediction => {
         console.log(prediction);
+      })
+      .catch(err=>{
+        console.log(err);
         
       })
-      this.stats.end();
-    })
+      
+    });
   }
 }
 
