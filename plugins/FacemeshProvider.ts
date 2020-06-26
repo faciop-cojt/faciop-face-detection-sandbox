@@ -8,11 +8,15 @@ import { version } from "@tensorflow/tfjs-backend-wasm/dist/version";
 import Vue from "vue";
 
 export class FacemeshProvider {
-  model: Promise<facemesh.FaceMesh>;
+  model: facemesh.FaceMesh;
   stats: Stats;
 
   constructor() {
-    this.model = facemesh.load({maxFaces: 1});
+    facemesh.load({maxFaces: 1})
+    .then((facemesh) => {
+      this.model = facemesh;
+    });
+
     this.stats = new Stats();
     console.log(version);
     
@@ -24,8 +28,7 @@ export class FacemeshProvider {
   }
 
   getFacemeshPoints(video: HTMLVideoElement) {
-    this.model.then(model => {
-      model.estimateFaces(video).then(prediction => {
+      this.model.estimateFaces(video).then(prediction => {
         console.log(prediction);
       })
       .catch(err=>{
@@ -33,7 +36,10 @@ export class FacemeshProvider {
         
       })
       
-    });
+    };
+
+  getFacemeshPointsAsync(video: HTMLVideoElement){
+
   }
 }
 
