@@ -19,15 +19,17 @@ export default Vue.extend({
   },
   mounted() {
     this.facemesh_video.initVideoObject(<HTMLVideoElement>this.$refs.video);
-    this.loop();
+    this.$refs.video.addEventListener('loadeddata', (event)=>{
+      this.loop();
+    })
   },
   methods: {
     loop(){
-      if(this.facemesh_video.inited){
+      // if(this.facemesh_video.inited){
         this.$facemeshProvider.getFacemeshPoints(<HTMLVideoElement>this.$refs.video)
-      }else{
+      // }else{
         requestAnimationFrame(this.loop)
-      }
+      // }
     }
   }
 });
