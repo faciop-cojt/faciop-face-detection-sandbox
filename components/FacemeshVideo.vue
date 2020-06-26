@@ -12,6 +12,8 @@ import { FacemeshVideo } from "~/plugins/FacemeshVideoObject";
 import { FacemeshProvider } from "~/plugins/FacemeshProvider";
 import { log } from "@tensorflow/tfjs-core";
 
+import {AnnotatedPrediction} from "@tensorflow-models/facemesh"
+
 export default Vue.extend({
   data() {
     return {
@@ -20,17 +22,17 @@ export default Vue.extend({
   },
   mounted() {
     this.facemesh_video.initVideoObject(<HTMLVideoElement>this.$refs.video);
-    this.$refs.video.addEventListener('loadeddata', (event)=>{
+    (<HTMLVideoElement>this.$refs.video).addEventListener('loadeddata', (event)=>{
       this.loop();
     })
   },
   methods: {
     loop(){
       this.$facemeshProvider.getFacemeshPointsAsync(<HTMLVideoElement>this.$refs.video)
-      .then(predictions =>{
+      .then((predictions:AnnotatedPrediction[]) =>{
         this.$nuxt.$emit('updateFacemesh', predictions[0].scaledMesh)
-        requestAnimationFrame(this.loop)
       })
+      requestAnimationFrame(this.loop)
     }
   }
 });
