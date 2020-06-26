@@ -10,6 +10,7 @@
 import Vue from "vue";
 import { FacemeshVideo } from "~/plugins/FacemeshVideoObject";
 import { FacemeshProvider } from "~/plugins/FacemeshProvider";
+import { log } from "@tensorflow/tfjs-core";
 
 export default Vue.extend({
   data() {
@@ -25,11 +26,11 @@ export default Vue.extend({
   },
   methods: {
     loop(){
-      // if(this.facemesh_video.inited){
-        this.$facemeshProvider.getFacemeshPoints(<HTMLVideoElement>this.$refs.video)
-      // }else{
+      this.$facemeshProvider.getFacemeshPointsAsync(<HTMLVideoElement>this.$refs.video)
+      .then(predictions =>{
+        this.$nuxt.$emit('updateFacemesh', predictions[0].scaledMesh)
         requestAnimationFrame(this.loop)
-      // }
+      })
     }
   }
 });
