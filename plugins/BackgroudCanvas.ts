@@ -8,6 +8,8 @@ export class BackgroudCanvas {
 
   cube: THREE.Mesh;
 
+  facemesh!: THREE.Points;
+
   constructor() {
     this.size = { width: window.innerWidth, height: window.innerHeight };
     this.scene = new THREE.Scene();

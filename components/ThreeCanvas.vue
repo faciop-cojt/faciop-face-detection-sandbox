@@ -33,7 +33,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    updateFacemesh(predictions) {
+    updateFacemesh(predictions:Array<number>) {
       console.log(predictions);
       
     }

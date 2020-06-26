@@ -8,7 +8,7 @@ import { version } from "@tensorflow/tfjs-backend-wasm/dist/version";
 import Vue from "vue";
 
 export class FacemeshProvider {
-  model: facemesh.FaceMesh;
+  model!: facemesh.FaceMesh;
   stats: Stats;
 
   constructor() {
@@ -38,15 +38,17 @@ export class FacemeshProvider {
   }
 
   async getFacemeshPointsAsync(video: HTMLVideoElement) {
-    return new Promise((resolve, reject) => {
-      this.model.estimateFaces(video)
-      .then((prediction) => {
-        resolve(prediction);
-      })
-      .catch(err => {
-        reject(err);
-      })
-    })
+    return new Promise<facemesh.AnnotatedPrediction[]>((resolve, reject) => {
+      if (this.model == undefined) resolve([]);
+      this.model
+        .estimateFaces(video)
+        .then(prediction => {
+          resolve(prediction);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
   }
 }
 
