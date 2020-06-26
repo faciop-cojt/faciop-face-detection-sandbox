@@ -31,8 +31,8 @@ export default Vue.extend({
       this.$facemeshProvider.getFacemeshPointsAsync(<HTMLVideoElement>this.$refs.video)
       .then((predictions:AnnotatedPrediction[]) =>{
         this.$nuxt.$emit('updateFacemesh', predictions[0].scaledMesh)
-        // requestAnimationFrame(this.loop)
       })
+      requestAnimationFrame(this.loop)
     }
   }
 });

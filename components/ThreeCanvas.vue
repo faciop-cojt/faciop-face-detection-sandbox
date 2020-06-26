@@ -20,10 +20,8 @@ export default Vue.extend({
       artwork: null
     };
   },
-  created() {
-    this.$nuxt.$on('updateFacemesh', this.updateFacemesh)
-  },
   mounted() {
+    this.$nuxt.$on('updateFacemesh', this.updateFacemesh)
     if(this.artwork == null) {
       this.artwork = this.$backgroundCanvas;
       console.log(this.artwork);
@@ -33,9 +31,8 @@ export default Vue.extend({
     }
   },
   methods: {
-    updateFacemesh(predictions:Array<number>) {
-      console.log(predictions);
-      
+    updateFacemesh(predictions:number[][]) {
+      this.artwork!.setFacemeshPoints(predictions);      
     }
   }
 })

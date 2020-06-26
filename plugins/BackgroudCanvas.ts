@@ -8,7 +8,8 @@ export class BackgroudCanvas {
 
   cube: THREE.Mesh;
 
-  facemesh!: THREE.Points;
+  facemesh: THREE.Points;
+  face_geometry: THREE.Geometry;
 
   constructor() {
     this.size = { width: window.innerWidth, height: window.innerHeight };
@@ -16,13 +17,13 @@ export class BackgroudCanvas {
     this.camera = new THREE.PerspectiveCamera(
       45,
       this.size.width / this.size.height,
-      0.1,
-      100
+      0.01,
+      1000
     );
 
     this.renderer = new THREE.WebGLRenderer();
 
-    this.camera.position.set(0, 3, -10);
+    this.camera.position.set(0, 0, -20);
     this.camera.lookAt(this.scene.position);
 
     const ambientLight = new THREE.AmbientLight("##fff", 0.5);
@@ -39,7 +40,19 @@ export class BackgroudCanvas {
     this.cube.position.set(0, 0, 0);
     light.target = this.cube;
 
+    this.face_geometry = new THREE.Geometry();
+    for(let i=0; i<463; i++){
+      this.face_geometry.vertices.push(new THREE.Vector3(0,0,0))
+    }
+    this.face_geometry.verticesNeedUpdate = true;
+    const face_mat = new THREE.PointsMaterial({
+      size: 0.1,
+      color: 0x000
+    })
+    this.facemesh = new THREE.Points(this.face_geometry, face_mat);
+
     this.scene.add(this.cube);
+    this.scene.add(this.facemesh)
 
     this.renderer.setClearColor("#8ed7d7");
     this.renderer.setSize(this.size.width, this.size.height);
@@ -56,10 +69,22 @@ export class BackgroudCanvas {
     this.renderer.setSize(this.size.width, this.size.height);
   }
 
+  setFacemeshPoints(points: number[][]){
+    this.face_geometry.vertices = [];
+    points
+    .forEach(point => {
+      this.face_geometry.vertices.push(
+        new THREE.Vector3(-point[0]/100, -point[1]/100, point[2]/100)
+      );
+    });
+    this.face_geometry.verticesNeedUpdate = true;
+  }
+
   loop() {
-    this.render();
+    // console.log(this.face_geometry.vertices);
+    
     this.cube.rotateY(0.02);
-    // THREE.ro
+    this.render();
     requestAnimationFrame(this.loop.bind(this));
   }
 
