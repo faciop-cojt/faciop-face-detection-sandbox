@@ -26,7 +26,7 @@ export class BackgroudCanvas {
     this.camera.position.set(0, 0, -10);
     this.camera.lookAt(this.scene.position);
 
-    const ambientLight = new THREE.AmbientLight("##fff", 0.5);
+    const ambientLight = new THREE.AmbientLight("#fff", 0.5);
     this.scene.add(ambientLight);
 
     const light = new THREE.DirectionalLight("#fff", 0.7);

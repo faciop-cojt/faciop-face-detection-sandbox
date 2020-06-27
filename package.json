@@ -10,7 +10,7 @@
     "generate": "nuxt-ts generate",
     "start": "nuxt-ts start",
     "generate:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES nuxt generate",
-    "deploy:gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup"
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.0",
