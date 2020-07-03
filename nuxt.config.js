@@ -38,7 +38,8 @@ export default {
   plugins: [
     {src: '~/plugins/BackgroudCanvas.ts'},
     {src: '~/plugins/FacemeshVideoObject.ts'},
-    {src: '~/plugins/FacemeshProvider.ts'}
+    {src: '~/plugins/FacemeshProvider.ts'},
+    {src: '~/plugins/Triangulation.ts'}
   ],
   /*
   ** Nuxt.js dev-modules

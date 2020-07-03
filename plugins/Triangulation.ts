@@ -184,3 +184,14 @@ export const TRIANGULATION = [
   290, 460, 401, 376, 435, 309, 250, 392, 376, 411, 433, 453, 341, 464, 357,
   453, 465, 343, 357, 412, 437, 343, 399, 344, 360, 440, 420, 437, 456, 360,
   420, 363, 361, 401, 288, 265, 372, 353, 390, 339, 249, 339, 448, 255];
+
+  declare module "vue/types/vue" {
+    interface Vue {
+      $triangulation: number[];
+    }
+  }
+  
+  export default ({ app }: { app: any }, inject: any) => {
+    inject("backgroundCanvas", TRIANGULATION);
+  };
+  

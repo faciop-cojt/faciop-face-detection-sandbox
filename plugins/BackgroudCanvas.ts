@@ -1,5 +1,7 @@
 import * as THREE from "three";
 
+import {TRIANGULATION} from "@/plugins/Triangulation"
+
 export class BackgroudCanvas {
   scene: THREE.Scene;
   camera: THREE.PerspectiveCamera;
