@@ -192,6 +192,6 @@ export const TRIANGULATION = [
   }
   
   export default ({ app }: { app: any }, inject: any) => {
-    inject("backgroundCanvas", TRIANGULATION);
+    inject("triangulation", TRIANGULATION);
   };
   
