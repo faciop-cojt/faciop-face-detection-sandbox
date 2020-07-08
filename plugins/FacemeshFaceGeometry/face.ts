@@ -24,11 +24,11 @@ class FaceMeshFaceGeometry extends BufferGeometry {
   w: number;
   h: number;
 
-  constructor(options: { useVideoTexture: boolean; normalizeCoords: boolean }) {
+  constructor(options: { useVideoTexture: boolean; normalizeCoords: boolean }|null) {
     super();
 
-    this.useVideoTexture = options.useVideoTexture || false;
-    this.normalizeCoords = options.normalizeCoords || false;
+    this.useVideoTexture = options?.useVideoTexture || false;
+    this.normalizeCoords = options?.normalizeCoords || false;
     this.flipped = false;
     this.positions = new Float32Array(468 * 3);
     this.uvs = new Float32Array(468 * 2);
