@@ -1,31 +1,30 @@
 import { FACES as indices, UVS as texCoords } from "./geometry";
 
-import * as facemesh from "@tensorflow-models/facemesh"
+import * as facemesh from "@tensorflow-models/facemesh";
 
 import {
   BufferGeometry,
   BufferAttribute,
   Vector3,
   Triangle,
-  Matrix4,
+  Matrix4
 } from "three";
 
 class FaceMeshFaceGeometry extends BufferGeometry {
-
-  useVideoTexture : boolean;
-  normalizeCoords:boolean;
-  flipped:boolean;
-  positions:Float32Array;
+  useVideoTexture: boolean;
+  normalizeCoords: boolean;
+  flipped: boolean;
+  positions: Float32Array;
   uvs: Float32Array;
-  p0:Vector3;
-  p1:Vector3;
-  p2:Vector3;
+  p0: Vector3;
+  p1: Vector3;
+  p2: Vector3;
   triangle: Triangle;
 
-  w:number;
-  h:number;
+  w: number;
+  h: number;
 
-  constructor(options: {useVideoTexture:boolean, normalizeCoords:boolean}) {
+  constructor(options: { useVideoTexture: boolean; normalizeCoords: boolean }) {
     super();
 
     this.useVideoTexture = options.useVideoTexture || false;
@@ -68,12 +67,12 @@ class FaceMeshFaceGeometry extends BufferGeometry {
     (<BufferAttribute>this.getAttribute("uv")).needsUpdate = true;
   }
 
-  setSize(w:number, h:number) {
+  setSize(w: number, h: number) {
     this.w = w;
     this.h = h;
   }
 
-  update(face:facemesh.AnnotatedPrediction, cameraFlipped:boolean) {
+  update(face: facemesh.AnnotatedPrediction, cameraFlipped: boolean) {
     let ptr = 0;
     const scaledMesh = <[number, number, number][]>face.scaledMesh;
 
@@ -108,7 +107,7 @@ class FaceMeshFaceGeometry extends BufferGeometry {
     this.computeVertexNormals();
   }
 
-  track(id0:number, id1:number, id2:number) {
+  track(id0: number, id1: number, id2: number) {
     const points = this.positions;
     this.p0.set(points[id0 * 3], points[id0 * 3 + 1], points[id0 * 3 + 2]);
     this.p1.set(points[id1 * 3], points[id1 * 3 + 1], points[id1 * 3 + 2]);
@@ -119,8 +118,14 @@ class FaceMeshFaceGeometry extends BufferGeometry {
     const normal = new Vector3();
     this.triangle.getNormal(normal);
     const matrix = new Matrix4();
-    const x = this.p1.clone().sub(this.p2).normalize();
-    const y = this.p1.clone().sub(this.p0).normalize();
+    const x = this.p1
+      .clone()
+      .sub(this.p2)
+      .normalize();
+    const y = this.p1
+      .clone()
+      .sub(this.p0)
+      .normalize();
     const z = new Vector3().crossVectors(x, y);
     const y2 = new Vector3().crossVectors(x, z).normalize();
     const z2 = new Vector3().crossVectors(x, y2).normalize();
