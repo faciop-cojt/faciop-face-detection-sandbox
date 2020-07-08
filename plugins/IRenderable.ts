@@ -5,7 +5,6 @@ export interface CanvasParameters {
 }
 
 export interface IRenderable {
-  constructor(canvas?: CanvasParameters): void;
   setCanvas(canvas: CanvasParameters): void;
   render(): void;
   loop(): void;
