@@ -24,7 +24,7 @@ class FaceMeshFaceGeometry extends BufferGeometry {
   w: number;
   h: number;
 
-  constructor(options: { useVideoTexture: boolean; normalizeCoords: boolean }|null) {
+  constructor(options: { useVideoTexture?: boolean; normalizeCoords?: boolean }|null) {
     super();
 
     this.useVideoTexture = options?.useVideoTexture || false;
