@@ -5,7 +5,6 @@
 <script lang="ts">
 import Vue from "vue";
 import { BackgroudCanvas } from "../plugins/BackgroudCanvas";
-import { log } from "three";
 
 import * as facemesh from '@tensorflow-models/facemesh'
 

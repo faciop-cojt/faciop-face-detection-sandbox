@@ -6,35 +6,24 @@ import { IFaceDataSettable } from "./IFaceDataSettable";
 import { FaceMeshFaceGeometry } from "./FacemeshFaceGeometry/face";
 
 import * as facemesh from "@tensorflow-models/facemesh";
+import { BufferAttribute, BufferGeometry } from "three";
 
 export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
-  private canvas?: HTMLElement;
+  private canvas?: HTMLCanvasElement;
   private renderer: THREE.WebGLRenderer;
   private scene: THREE.Scene;
 
   private camera: THREE.OrthographicCamera;
 
-  private face_obj?: THREE.Mesh;
+  private face_obj: THREE.Mesh;
   private face_geometry: FaceMeshFaceGeometry;
 
-  constructor(canvas?: Renderable.CanvasParameters) {
+  constructor() {
     // initialize
-    this.canvas = canvas?.canvas || undefined;
-    this.renderer = new THREE.WebGLRenderer({
-      canvas: canvas?.canvas
-    });
     this.scene = new THREE.Scene();
+    this.renderer = new THREE.WebGLRenderer();
 
-    this.camera = new THREE.OrthographicCamera(-1,1,1,-1);
-    if (canvas?.width && canvas?.height) {
-      this.camera = new THREE.OrthographicCamera(
-        -canvas.width / 2.0,
-        canvas.width / 2.0,
-        canvas.height / 2.0,
-        -canvas.height / 2.0
-      );
-      this.camera.updateProjectionMatrix();
-    }
+    this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1);
     this.face_geometry = new FaceMeshFaceGeometry({
       normalizeCoords: false,
       useVideoTexture: false
@@ -48,35 +37,39 @@ export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
 
     this.scene.add(this.face_obj);
 
-    let light = new THREE.DirectionalLight('#fff');
+    let light = new THREE.DirectionalLight("#fff");
     this.scene.add(light);
-
   }
   setCanvas(canvas: Renderable.CanvasParameters): void {
-    this.canvas = canvas.canvas || this.canvas;
-    if(canvas.canvas){
-      this.renderer = new THREE.WebGLRenderer({
-        canvas: canvas.canvas
-      })
-    }
+    this.canvas = canvas.canvas;
+    this.canvas!.width = canvas.width;
+    this.canvas!.height = canvas.height;
+    
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: canvas.canvas
+    });
 
-    if (canvas?.width && canvas?.height) {
-      this.camera = new THREE.OrthographicCamera(
-        -canvas.width / 2.0,
-        canvas.width / 2.0,
-        canvas.height / 2.0,
-        -canvas.height / 2.0
-      );
-      this.camera.updateProjectionMatrix();
-    }
+    this.camera = new THREE.OrthographicCamera(
+      -canvas.width / 2.0,
+      canvas.width / 2.0,
+      canvas.height / 2.0,
+      -canvas.height / 2.0
+    );
+    this.camera.updateProjectionMatrix();
   }
   render(): void {
-    throw new Error("Method not implemented.");
+    this.renderer.render(this.scene, this.camera);
   }
   loop(): void {
-    throw new Error("Method not implemented.");
+    this.render();
+    requestAnimationFrame(this.loop);
   }
   setFaceData(face: facemesh.AnnotatedPrediction): void {
-    throw new Error("Method not implemented.");
+    this.face_geometry.update(face, false);
+
+    // この処理いるのか？
+    (<BufferAttribute>(
+      (<BufferGeometry>this.face_obj.geometry).attributes.position
+    )).needsUpdate = true;
   }
 }
