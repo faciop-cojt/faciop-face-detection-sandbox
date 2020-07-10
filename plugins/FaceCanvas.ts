@@ -6,7 +6,7 @@ import { IFaceDataSettable } from "./IFaceDataSettable";
 import { FaceMeshFaceGeometry } from "./FacemeshFaceGeometry/face";
 
 import * as facemesh from "@tensorflow-models/facemesh";
-import { BufferAttribute, BufferGeometry } from "three";
+import { BufferAttribute, BufferGeometry, Vector3 } from "three";
 
 export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
   private canvas?: HTMLCanvasElement;
@@ -37,7 +37,7 @@ export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
 
     this.scene.add(this.face_obj);
 
-    let light = new THREE.DirectionalLight("#fff");
+    let light = new THREE.AmbientLight("#fff", 1.0);
     this.scene.add(light);
   }
   setCanvas(canvas: Renderable.CanvasParameters): void {
@@ -48,6 +48,9 @@ export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
     this.renderer = new THREE.WebGLRenderer({
       canvas: canvas.canvas
     });
+
+    this.renderer.setClearColor("#44aaaa");
+    this.renderer.setSize(this.canvas.width, this.canvas.height);
 
     this.camera = new THREE.OrthographicCamera(
       -canvas.width / 2.0,
