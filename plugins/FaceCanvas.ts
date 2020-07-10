@@ -9,7 +9,7 @@ import * as facemesh from "@tensorflow-models/facemesh";
 import { BufferAttribute, BufferGeometry, Vector3 } from "three";
 
 export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
-  private canvas?: HTMLCanvasElement;
+  public canvas?: HTMLCanvasElement;
   private renderer: THREE.WebGLRenderer;
   private scene: THREE.Scene;
 
@@ -17,6 +17,8 @@ export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
 
   private face_obj: THREE.Mesh;
   private face_geometry: FaceMeshFaceGeometry;
+
+  public canvasSetted: boolean
 
   constructor() {
     // initialize
@@ -39,6 +41,8 @@ export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
 
     let light = new THREE.AmbientLight("#fff", 1.0);
     this.scene.add(light);
+
+    this.canvasSetted = false;
   }
   setCanvas(canvas: Renderable.CanvasParameters): void {
     this.canvas = canvas.canvas;

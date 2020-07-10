@@ -37,7 +37,7 @@ html {
 
 #canvas-wrapper {
   position: relative;
-  z-index: -10;
+  z-index: 2;
 }
 
 #nuxt-proj-wrapper {

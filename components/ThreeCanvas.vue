@@ -5,10 +5,8 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  data() {
-    return {
-      msg: "hello"
-    }
+  mounted(){
+    this.$canvas_ready(<HTMLCanvasElement>this.$refs.canvas);
   }
 })
 </script>
