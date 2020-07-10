@@ -11,7 +11,7 @@
 <script lang="ts">
 import Vue from "vue";
 
-import ThreeCanvas from '@/components/ThreeCanvas.vue'
+import ThreeCanvas from '~/components/ThreeCanvas.vue'
 import FacemeshVideo from '@/components/FacemeshVideo.vue'
 
 export default Vue.extend({

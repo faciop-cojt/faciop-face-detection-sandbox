@@ -8,9 +8,16 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { log } from "@tensorflow/tfjs-core";
 export default Vue.extend({
   mounted() {
-    (<HTMLVideoElement>this.$refs.video).onloadeddata = ev => {};
+
+    this.$facemeshVideo.initVideoObject(<HTMLVideoElement>this.$refs.video);
+    
+    (<HTMLVideoElement>this.$refs.video).onloadeddata = ev => {
+      console.log("Helloooooooooooooooooooooooo");
+      
+    };
   }
 });
 </script>

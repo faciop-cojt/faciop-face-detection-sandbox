@@ -42,6 +42,7 @@ export class FacemeshVideo {
   }
 
   initVideoObject(video: HTMLVideoElement) {
+    console.log("video init!")
     video.width = this.size.w;
     video.height = this.size.h;
     video.autoplay = this.autoplay;

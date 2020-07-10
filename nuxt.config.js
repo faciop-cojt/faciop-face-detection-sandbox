@@ -35,7 +35,9 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: [
+    {src: '~/plugins/FacemeshInjectionManager.ts', mode: 'client'}
+  ],
   /*
   ** Nuxt.js dev-modules
   */
