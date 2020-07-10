@@ -11,17 +11,14 @@ let facemesh_video = new FacemeshVideo();
 
 declare module "vue/types/vue" {
   interface Vue {
-    $facecanvas: FaceCanvas
-  }
-}
-declare module "vue/types/vue" {
-  interface Vue {
-    $facemeshVideo: FacemeshVideo
+    $facecanvas: FaceCanvas;
+    $facemeshVideo: FacemeshVideo;
+    facemeshProvider: FacemeshProvider;
   }
 }
 
 export default ({ app }: { app: any }, inject: any) => {
   inject("facecanvas", face_canvas);
-  // inject("facemeshProcider", facemesh_provider);
-  inject("facemeshVideo", facemesh_video)
+  inject("facemeshProcider", facemesh_provider);
+  inject("facemeshVideo", facemesh_video);
 };
