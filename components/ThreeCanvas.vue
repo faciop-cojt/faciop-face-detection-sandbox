@@ -3,35 +3,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { BackgroudCanvas } from "../plugins/BackgroudCanvas";
-
-import * as facemesh from '@tensorflow-models/facemesh'
-
-type DataType = {
-  artwork: BackgroudCanvas | null;
-};
-
+import Vue from 'vue'
 export default Vue.extend({
-
-  data(): DataType {
+  data() {
     return {
-      artwork: null
-    };
-  },
-  mounted() {
-    this.$nuxt.$on('updateFacemesh', this.updateFacemesh)
-    if(this.artwork == null) {
-      this.artwork = this.$backgroundCanvas;
-      console.log(this.artwork);
-      
-      this.artwork.initRenderer(<HTMLCanvasElement>this.$refs.canvas);
-      this.artwork.loop();
-    }
-  },
-  methods: {
-    updateFacemesh(predictions:number[][]) {
-      this.artwork!.setFacemeshPoints(predictions);      
+      msg: "hello"
     }
   }
 })

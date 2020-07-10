@@ -93,13 +93,3 @@ export class BackgroudCanvas {
     this.renderer.render(this.scene, this.camera);
   }
 }
-
-declare module "vue/types/vue" {
-  interface Vue {
-    $backgroundCanvas: BackgroudCanvas;
-  }
-}
-
-export default ({ app }: { app: any }, inject: any) => {
-  inject("backgroundCanvas", new BackgroudCanvas());
-};

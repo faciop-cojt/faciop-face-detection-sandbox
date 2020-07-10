@@ -51,13 +51,3 @@ export class FacemeshProvider {
     });
   }
 }
-
-declare module "vue/types/vue" {
-  interface Vue {
-    $facemeshProvider: FacemeshProvider;
-  }
-}
-
-export default ({ app }: { app: any }, inject: any) => {
-  inject("facemeshProvider", new FacemeshProvider());
-};

@@ -54,13 +54,3 @@ export class FacemeshVideo {
       .catch(err => console.log(err));
   }
 }
-
-declare module "vue/types/vue" {
-  interface Vue {
-    $facemeshVideo: FacemeshVideo;
-  }
-}
-
-export default ({ app }: { app: any }, inject: any) => {
-  inject("facemeshVideo", new FacemeshVideo());
-};
