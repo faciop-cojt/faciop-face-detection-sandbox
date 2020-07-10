@@ -58,6 +58,9 @@ export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
       canvas.height / 2.0,
       -canvas.height / 2.0
     );
+
+    this.face_geometry.setSize(this.canvas.width, this.canvas.height);
+    
     this.camera.updateProjectionMatrix();
   }
   render(): void {
