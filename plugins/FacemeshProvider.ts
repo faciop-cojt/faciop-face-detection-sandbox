@@ -21,7 +21,7 @@ export class FacemeshProvider {
     tf.setBackend("wasm");
   }
 
-  async getFacemeshPointsAsync(video: HTMLVideoElement) {
+  async getFacemeshPointsAsync(video: HTMLVideoElement) {    
     return new Promise<facemesh.AnnotatedPrediction[]>((resolve, reject) => {
       if (this.model == undefined) resolve([]);
       this.model

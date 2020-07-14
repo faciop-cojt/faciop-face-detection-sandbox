@@ -25,7 +25,7 @@ export default Vue.extend({
       .then(prediction=>{
         this.$facecanvas.setFaceData(prediction[0]);
       })
-      requestAnimationFrame(()=>this.loop)
+      requestAnimationFrame(()=>this.loop(video))
     }
   }
 });

@@ -44,9 +44,9 @@ export class FaceCanvas {
 
     // dummy cube
     let cube_geo = new THREE.BoxGeometry(1,1,1);
-    let cube_mesh = new THREE.Mesh(cube_geo, face_mat);
+    let cube_mesh = new THREE.Mesh(cube_geo, new THREE.MeshBasicMaterial({color: "#fff"}));
     cube_mesh.position.set(0,0,0);
-    cube_mesh.scale.set(0.1,0.1,0.1);
+    // cube_mesh.scale.set(0.1,0.1,0.1);
     this.scene.add(cube_mesh);
 
     this.canvas_width = 0;
@@ -66,7 +66,6 @@ export class FaceCanvas {
 
     this.renderer.setClearColor("#44aaaa");
     this.renderer.setSize(this.canvas_width, this.canvas_height);
-    this.renderer.clear()
 
     this.camera = new THREE.OrthographicCamera(
       -this.canvas_width / 2.0,
@@ -98,16 +97,15 @@ export class FaceCanvas {
     }
   }
   
-  render(): void {
+  render(): void {    
     this.renderer.render(this.scene, this.camera);
-    // this.renderer.clear();
   }
   setFaceData(face: facemesh.AnnotatedPrediction): void {
     this.face_geometry.update(face, false);
 
     // この処理いるのか？
-    // (<BufferAttribute>(
-    //   (<BufferGeometry>this.face_obj.geometry).attributes.position
-    // )).needsUpdate = true;
+    (<THREE.BufferAttribute>(
+      (<THREE.BufferGeometry>this.face_obj.geometry).attributes.position
+    )).needsUpdate = true;
   }
 }
