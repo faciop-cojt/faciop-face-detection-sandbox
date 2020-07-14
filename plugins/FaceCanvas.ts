@@ -38,16 +38,9 @@ export class FaceCanvas {
     this.scene.add(this.face_obj);
 
     let light = new THREE.DirectionalLight("#fff", 1.0);
-    light.position.set(-1,1,-1);
+    light.position.set(1,1,1);
     light.lookAt(new THREE.Vector3(0,0,0));
     this.scene.add(light);
-
-    // dummy cube
-    let cube_geo = new THREE.BoxGeometry(1,1,1);
-    let cube_mesh = new THREE.Mesh(cube_geo, new THREE.MeshBasicMaterial({color: "#fff"}));
-    cube_mesh.position.set(0,0,0);
-    // cube_mesh.scale.set(0.1,0.1,0.1);
-    this.scene.add(cube_mesh);
 
     this.canvas_width = 0;
     this.canvas_height = 0;
@@ -61,22 +54,27 @@ export class FaceCanvas {
     this.canvas!.height = this.canvas_height;
     
     this.renderer = new THREE.WebGLRenderer({
-      canvas: this.canvas
+      canvas: this.canvas,
+      alpha: true
     });
 
-    this.renderer.setClearColor("#44aaaa");
+    this.renderer.setClearAlpha(0);
     this.renderer.setSize(this.canvas_width, this.canvas_height);
 
     this.camera = new THREE.OrthographicCamera(
       -this.canvas_width / 2.0,
       this.canvas_width / 2.0,
       this.canvas_height / 2.0,
-      -this.canvas_height / 2.0
+      -this.canvas_height / 2.0,
     );
+    this.camera.position.set(0,0,100);
+
 
     this.face_geometry.setSize(this.canvas_width, this.canvas_height);
     
     this.camera.updateProjectionMatrix();
+    console.log(this.camera.bottom);
+    
   }
 
   setCanvas(canvas: HTMLCanvasElement):void {
@@ -97,7 +95,9 @@ export class FaceCanvas {
     }
   }
   
-  render(): void {    
+  render(): void {
+    // console.log("hello");
+    
     this.renderer.render(this.scene, this.camera);
   }
   setFaceData(face: facemesh.AnnotatedPrediction): void {
