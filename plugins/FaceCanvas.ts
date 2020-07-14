@@ -4,6 +4,9 @@ import { FaceMeshFaceGeometry } from "./FacemeshFaceGeometry/face";
 
 import * as facemesh from "@tensorflow-models/facemesh";
 
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader"
+
+
 export class FaceCanvas {
   public canvas?: HTMLCanvasElement;
   private renderer: THREE.WebGLRenderer;
@@ -20,6 +23,8 @@ export class FaceCanvas {
   private isCanvasSetted: boolean;
   private isCanvasSizeSetted: boolean;
 
+  private glasses?: THREE.Object3D;
+
   constructor() {
     // initialize
     this.scene = new THREE.Scene();
@@ -27,11 +32,12 @@ export class FaceCanvas {
 
     this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1);
     this.face_geometry = new FaceMeshFaceGeometry({
-      normalizeCoords: true,
+      normalizeCoords: false,
       useVideoTexture: false
     });
     let face_mat = new THREE.MeshStandardMaterial({
-      color: "#666"
+      color: "#fff",
+      visible: false
     });
     this.face_obj = new THREE.Mesh(this.face_geometry, face_mat);
 
@@ -47,6 +53,27 @@ export class FaceCanvas {
 
     this.isCanvasSetted = false;
     this.isCanvasSizeSetted = false;
+
+    let loader = new GLTFLoader().load(
+      "/glasses.glb",
+      (data)=>{
+        const gltf = data;
+        this.glasses = gltf.scene;
+        this.glasses.scale.set(3,3,3);
+        this.scene.add(this.glasses);
+        console.log("glft loaded");
+        
+     },
+     (xhr)=>{
+
+     },
+     (err)=>{
+       console.log(err);
+       
+     }
+    )
+
+
   }
 
   constructCanvas(): void {
@@ -58,6 +85,7 @@ export class FaceCanvas {
       alpha: true
     });
 
+    // this.renderer.setClearColor("#44aaaa")
     this.renderer.setClearAlpha(0);
     this.renderer.setSize(this.canvas_width, this.canvas_height);
 
@@ -73,7 +101,6 @@ export class FaceCanvas {
     this.face_geometry.setSize(this.canvas_width, this.canvas_height);
     
     this.camera.updateProjectionMatrix();
-    console.log(this.camera.bottom);
     
   }
 
@@ -96,7 +123,9 @@ export class FaceCanvas {
   }
   
   render(): void {
-    // console.log("hello");
+    this.glasses?.position.copy(this.face_geometry.track(168,122,351).position);
+    this.glasses?.rotation.setFromRotationMatrix(this.face_geometry.track(168,122,351).rotation)
+    this.glasses?.rotateY(3.14);
     
     this.renderer.render(this.scene, this.camera);
   }
