@@ -7,7 +7,7 @@ export class FacemeshVideo {
   inited: boolean;
 
   constructor() {
-    this.size = { w: 360, h: 240 };
+    this.size = { w: 480, h: 360 };
     this.resolution = { w: 1920, h: 1080 };
     this.autoplay = true;
     this.inited = false;
@@ -33,8 +33,8 @@ export class FacemeshVideo {
     return navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
-        width: { ideal: this.resolution.w },
-        height: { ideal: this.resolution.h },
+        // width: { ideal: this.resolution.w },
+        // height: { ideal: this.resolution.h },
         deviceId: "aeaa5ef31b7e86653889fb6d59fc2b6772c14567c8df06895d4b0312b9bb5d55",
         facingMode: "user"
       }

@@ -15,7 +15,7 @@ export default Vue.extend({
     this.$facemeshVideo.initVideoObject(video);
 
     video.onloadeddata = ev => {
-      this.$video_ready(<HTMLVideoElement>this.$refs.video);
+      this.$facecanvas.setCanvasSize(video.width, video.height);
       this.loop(video);
     };
   },
@@ -24,9 +24,8 @@ export default Vue.extend({
       this.$facemeshProvider.getFacemeshPointsAsync(video)
       .then(prediction=>{
         this.$facecanvas.setFaceData(prediction[0]);
-        this.$facecanvas.render();
       })
-      requestAnimationFrame(()=>this.loop(video))
+      requestAnimationFrame(()=>this.loop)
     }
   }
 });

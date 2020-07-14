@@ -15,20 +15,10 @@ let videoReady = (video: HTMLVideoElement): void => {
   canvas_width = video.width;
   canvas_height = video.height;
 
-  if(face_canvas.canvasSetted && face_canvas.canvas!==undefined){
-    face_canvas.setCanvas({
-      canvas: face_canvas.canvas,
-      width: canvas_width,
-      height: canvas_height
-    })
-  }
+  face_canvas.setCanvasSize(canvas_width, canvas_height);
 };
 let canvasReady = (canvas: HTMLCanvasElement) => {
-  face_canvas.setCanvas({
-    canvas: canvas,
-    height: canvas_height,
-    width: canvas_width
-  })
+  face_canvas.setCanvas(canvas);
 };
 
 declare module "vue/types/vue" {

@@ -8,7 +8,7 @@ import { FaceMeshFaceGeometry } from "./FacemeshFaceGeometry/face";
 import * as facemesh from "@tensorflow-models/facemesh";
 import { BufferAttribute, BufferGeometry, Vector3 } from "three";
 
-export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
+export class FaceCanvas {
   public canvas?: HTMLCanvasElement;
   private renderer: THREE.WebGLRenderer;
   private scene: THREE.Scene;
@@ -18,7 +18,11 @@ export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
   private face_obj: THREE.Mesh;
   private face_geometry: FaceMeshFaceGeometry;
 
-  public canvasSetted: boolean
+  private canvas_width:number;
+  private canvas_height: number;
+
+  private isCanvasSetted: boolean;
+  private isCanvasSizeSetted: boolean;
 
   constructor() {
     // initialize
@@ -35,43 +39,65 @@ export class FaceCanvas implements Renderable.IRenderable, IFaceDataSettable {
     });
     this.face_obj = new THREE.Mesh(this.face_geometry, face_mat);
 
-    // TODO: scene creation
-
     this.scene.add(this.face_obj);
 
     let light = new THREE.AmbientLight("#fff", 1.0);
     this.scene.add(light);
 
-    this.canvasSetted = false;
+    this.canvas_width = 0;
+    this.canvas_height = 0;
+
+    this.isCanvasSetted = false;
+    this.isCanvasSizeSetted = false;
   }
-  setCanvas(canvas: Renderable.CanvasParameters): void {
-    this.canvas = canvas.canvas;
-    this.canvas!.width = canvas.width;
-    this.canvas!.height = canvas.height;
+
+  constructCanvas(canvas: HTMLCanvasElement): void {
+    this.canvas!.width = this.canvas_width;
+    this.canvas!.height = this.canvas_height;
     
     this.renderer = new THREE.WebGLRenderer({
-      canvas: canvas.canvas
+      canvas: canvas
     });
 
     this.renderer.setClearColor("#44aaaa");
-    this.renderer.setSize(this.canvas.width, this.canvas.height);
+    this.renderer.setSize(this.canvas_width, this.canvas_height);
 
     this.camera = new THREE.OrthographicCamera(
-      -canvas.width / 2.0,
-      canvas.width / 2.0,
-      canvas.height / 2.0,
-      -canvas.height / 2.0
+      -this.canvas_width / 2.0,
+      this.canvas_width / 2.0,
+      this.canvas_height / 2.0,
+      -this.canvas_height / 2.0
     );
 
-    this.face_geometry.setSize(this.canvas.width, this.canvas.height);
+    this.face_geometry.setSize(this.canvas_width, this.canvas_height);
     
     this.camera.updateProjectionMatrix();
   }
-  render(): void {
+
+  setCanvas(canvas: HTMLCanvasElement):void {
+    this.canvas = canvas;
+    this.isCanvasSetted = true;
+
+    if(this.isCanvasSizeSetted){
+      this.constructCanvas(canvas);
+    }
+  }
+
+  setCanvasSize(width: number, height: number):void {
+    this.canvas_width = width;
+    this.canvas_height = height;
+    this.isCanvasSizeSetted = true;
+    if(this.isCanvasSetted){
+      this.constructCanvas(this.canvas!);
+    }
+  }
+  
+  render(canvas: HTMLCanvasElement): void {
+    this.renderer.domElement = canvas;
     this.renderer.render(this.scene, this.camera);
   }
   loop(): void {
-    this.render();
+    // this.render();
     requestAnimationFrame(this.loop);
   }
   setFaceData(face: facemesh.AnnotatedPrediction): void {

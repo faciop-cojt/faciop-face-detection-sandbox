@@ -5,7 +5,8 @@ export interface CanvasParameters {
 }
 
 export interface IRenderable {
-  setCanvas(canvas: CanvasParameters): void;
+  setCanvas(canvas: HTMLCanvasElement): void;
+  setCanvasSize(width: number, height: number): void;
   render(): void;
   loop(): void;
 }

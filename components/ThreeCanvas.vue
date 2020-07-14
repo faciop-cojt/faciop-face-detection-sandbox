@@ -6,7 +6,18 @@
 import Vue from 'vue'
 export default Vue.extend({
   mounted(){
-    this.$canvas_ready(<HTMLCanvasElement>this.$refs.canvas);
+    let canvas: HTMLCanvasElement = <HTMLCanvasElement>this.$refs.canvas;
+    this.$facecanvas.setCanvas(canvas);
+
+    canvas.onloadeddata = event => {
+      this.animationLoop(canvas);
+    }
+  },
+  methods: {
+    animationLoop(canvas: HTMLCanvasElement) {
+      this.$facecanvas.render(canvas);
+      requestAnimationFrame(()=>this.animationLoop);
+    }
   }
 })
 </script>
