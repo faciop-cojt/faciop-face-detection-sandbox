@@ -14,8 +14,6 @@ export class FacemeshProvider {
       this.model = facemesh;
     });
 
-    console.log(version);
-
     tfjsWasm.setWasmPath(
       `https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@${version}/dist/tfjs-backend-wasm.wasm`,
       true

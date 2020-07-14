@@ -10,12 +10,12 @@ export default Vue.extend({
     this.$facecanvas.setCanvas(canvas);
 
     canvas.onloadeddata = event => {
-      this.animationLoop(canvas);
+      this.animationLoop();
     }
   },
   methods: {
-    animationLoop(canvas: HTMLCanvasElement) {
-      this.$facecanvas.render(canvas);
+    animationLoop() {
+      this.$facecanvas.render();
       requestAnimationFrame(()=>this.animationLoop);
     }
   }

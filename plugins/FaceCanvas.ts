@@ -1,12 +1,8 @@
 import * as THREE from "three";
 
-import * as Renderable from "./IRenderable";
-import { IFaceDataSettable } from "./IFaceDataSettable";
-
 import { FaceMeshFaceGeometry } from "./FacemeshFaceGeometry/face";
 
 import * as facemesh from "@tensorflow-models/facemesh";
-import { BufferAttribute, BufferGeometry, Vector3 } from "three";
 
 export class FaceCanvas {
   public canvas?: HTMLCanvasElement;
@@ -41,8 +37,17 @@ export class FaceCanvas {
 
     this.scene.add(this.face_obj);
 
-    let light = new THREE.AmbientLight("#fff", 1.0);
+    let light = new THREE.DirectionalLight("#fff", 1.0);
+    light.position.set(-1,1,-1);
+    light.lookAt(new THREE.Vector3(0,0,0));
     this.scene.add(light);
+
+    // dummy cube
+    let cube_geo = new THREE.BoxGeometry(1,1,1);
+    let cube_mesh = new THREE.Mesh(cube_geo, face_mat);
+    cube_mesh.position.set(0,0,0);
+    cube_mesh.scale.set(0.1,0.1,0.1);
+    this.scene.add(cube_mesh);
 
     this.canvas_width = 0;
     this.canvas_height = 0;
@@ -51,16 +56,17 @@ export class FaceCanvas {
     this.isCanvasSizeSetted = false;
   }
 
-  constructCanvas(canvas: HTMLCanvasElement): void {
+  constructCanvas(): void {
     this.canvas!.width = this.canvas_width;
     this.canvas!.height = this.canvas_height;
     
     this.renderer = new THREE.WebGLRenderer({
-      canvas: canvas
+      canvas: this.canvas
     });
 
     this.renderer.setClearColor("#44aaaa");
     this.renderer.setSize(this.canvas_width, this.canvas_height);
+    this.renderer.clear()
 
     this.camera = new THREE.OrthographicCamera(
       -this.canvas_width / 2.0,
@@ -79,7 +85,7 @@ export class FaceCanvas {
     this.isCanvasSetted = true;
 
     if(this.isCanvasSizeSetted){
-      this.constructCanvas(canvas);
+      this.constructCanvas();
     }
   }
 
@@ -88,24 +94,20 @@ export class FaceCanvas {
     this.canvas_height = height;
     this.isCanvasSizeSetted = true;
     if(this.isCanvasSetted){
-      this.constructCanvas(this.canvas!);
+      this.constructCanvas();
     }
   }
   
-  render(canvas: HTMLCanvasElement): void {
-    this.renderer.domElement = canvas;
+  render(): void {
     this.renderer.render(this.scene, this.camera);
-  }
-  loop(): void {
-    // this.render();
-    requestAnimationFrame(this.loop);
+    // this.renderer.clear();
   }
   setFaceData(face: facemesh.AnnotatedPrediction): void {
     this.face_geometry.update(face, false);
 
     // この処理いるのか？
-    (<BufferAttribute>(
-      (<BufferGeometry>this.face_obj.geometry).attributes.position
-    )).needsUpdate = true;
+    // (<BufferAttribute>(
+    //   (<BufferGeometry>this.face_obj.geometry).attributes.position
+    // )).needsUpdate = true;
   }
 }
