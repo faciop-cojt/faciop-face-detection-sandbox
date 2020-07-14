@@ -7,7 +7,7 @@ export class FacemeshVideo {
   inited: boolean;
 
   constructor() {
-    this.size = { w: 480, h: 360 };
+    this.size = { w: 640, h: 480 };
     this.resolution = { w: 1920, h: 1080 };
     this.autoplay = true;
     this.inited = false;

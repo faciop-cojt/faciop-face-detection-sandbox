@@ -27,7 +27,7 @@ export class FaceCanvas {
 
     this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1);
     this.face_geometry = new FaceMeshFaceGeometry({
-      normalizeCoords: false,
+      normalizeCoords: true,
       useVideoTexture: false
     });
     let face_mat = new THREE.MeshStandardMaterial({
