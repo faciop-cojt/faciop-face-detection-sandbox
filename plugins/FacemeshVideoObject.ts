@@ -7,7 +7,7 @@ export class FacemeshVideo {
   inited: boolean;
 
   constructor() {
-    this.size = { w: 360, h: 240 };
+    this.size = { w: 640, h: 480 };
     this.resolution = { w: 1920, h: 1080 };
     this.autoplay = true;
     this.inited = false;
@@ -33,15 +33,16 @@ export class FacemeshVideo {
     return navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
-        width: { ideal: this.resolution.w },
-        height: { ideal: this.resolution.h },
-        // deviceId: "13b3f5df683da62be8c9420de88d49cf681a769a642ec1d02667feab43731eed",
+        // width: { ideal: this.resolution.w },
+        // height: { ideal: this.resolution.h },
+        deviceId: "aeaa5ef31b7e86653889fb6d59fc2b6772c14567c8df06895d4b0312b9bb5d55",
         facingMode: "user"
       }
     });
   }
 
   initVideoObject(video: HTMLVideoElement) {
+    console.log("video init!")
     video.width = this.size.w;
     video.height = this.size.h;
     video.autoplay = this.autoplay;
@@ -54,13 +55,3 @@ export class FacemeshVideo {
       .catch(err => console.log(err));
   }
 }
-
-declare module "vue/types/vue" {
-  interface Vue {
-    $facemeshVideo: FacemeshVideo;
-  }
-}
-
-export default ({ app }: { app: any }, inject: any) => {
-  inject("facemeshVideo", new FacemeshVideo());
-};

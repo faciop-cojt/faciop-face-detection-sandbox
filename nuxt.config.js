@@ -36,9 +36,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '~/plugins/BackgroudCanvas.ts'},
-    {src: '~/plugins/FacemeshVideoObject.ts'},
-    {src: '~/plugins/FacemeshProvider.ts'}
+    {src: '~/plugins/FacemeshInjectionManager.ts', mode: 'client'}
   ],
   /*
   ** Nuxt.js dev-modules

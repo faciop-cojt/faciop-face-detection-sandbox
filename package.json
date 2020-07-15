@@ -27,7 +27,7 @@
     "push-dir": "^0.4.1",
     "sass-loader": "^8.0.2",
     "stats.js": "^0.17.0",
-    "three": "^0.117.1"
+    "three": "^0.118.1"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^1.0.2"

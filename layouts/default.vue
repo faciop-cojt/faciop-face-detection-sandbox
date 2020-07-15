@@ -10,8 +10,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import ThreeCanvas from "../components/ThreeCanvas.vue";
-import FacemeshVideo from "../components/FacemeshVideo.vue";
+
+import ThreeCanvas from '~/components/ThreeCanvas.vue'
+import FacemeshVideo from '@/components/FacemeshVideo.vue'
 
 export default Vue.extend({
   components: {
@@ -36,7 +37,7 @@ html {
 
 #canvas-wrapper {
   position: relative;
-  z-index: -10;
+  z-index: 2;
 }
 
 #nuxt-proj-wrapper {
