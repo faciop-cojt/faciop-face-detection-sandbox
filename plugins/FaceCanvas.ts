@@ -35,10 +35,18 @@ export class FaceCanvas {
       normalizeCoords: false,
       useVideoTexture: false
     });
-    let face_mat = new THREE.MeshStandardMaterial({
-      color: "#fff",
-      visible: false
-    });
+
+
+    let vertex_shader = "void main(){ gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }"
+    let frag_shader = "void main(){ gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0); }"
+    // let face_mat = new THREE.MeshStandardMaterial({
+    //   color: "#fff",
+    //   visible: false
+    // });
+    let face_mat = new THREE.ShaderMaterial({
+      vertexShader: vertex_shader,
+      fragmentShader: frag_shader
+    })
     this.face_obj = new THREE.Mesh(this.face_geometry, face_mat);
 
     this.scene.add(this.face_obj);
@@ -56,7 +64,8 @@ export class FaceCanvas {
 
     let loader = new GLTFLoader().load(
       "/faciop-face-detection-sandbox/glasses.glb",
-      // "/glasses.glb",
+      // "/glasses.glb",y
+      
       (data)=>{
         const gltf = data;
         this.glasses = gltf.scene;
