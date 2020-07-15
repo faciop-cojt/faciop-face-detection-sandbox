@@ -63,8 +63,9 @@ export class FaceCanvas {
     this.isCanvasSizeSetted = false;
 
     let loader = new GLTFLoader().load(
-      // "/faciop-face-detection-sandbox/glasses.glb",
-      "/glasses.glb",
+      "/faciop-face-detection-sandbox/glasses.glb",
+      // "/glasses.glb",y
+      
       (data)=>{
         const gltf = data;
         this.glasses = gltf.scene;
