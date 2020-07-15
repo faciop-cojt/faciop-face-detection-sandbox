@@ -35,7 +35,7 @@ export class FacemeshVideo {
       video: {
         // width: { ideal: this.resolution.w },
         // height: { ideal: this.resolution.h },
-        deviceId: "aeaa5ef31b7e86653889fb6d59fc2b6772c14567c8df06895d4b0312b9bb5d55",
+        // deviceId: "aeaa5ef31b7e86653889fb6d59fc2b6772c14567c8df06895d4b0312b9bb5d55",
         facingMode: "user"
       }
     });
