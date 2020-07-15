@@ -4,13 +4,13 @@ export class FacemeshVideo {
   size: { w: number; h: number };
   resolution: { w: number; h: number };
   autoplay: boolean;
-  inited: boolean;
+  // inited: boolean;
 
   constructor() {
     this.size = { w: 640, h: 480 };
     this.resolution = { w: 1920, h: 1080 };
     this.autoplay = true;
-    this.inited = false;
+    // this.inited = false;
   }
 
   setSize(size: { w: number; h: number }) {
@@ -27,6 +27,7 @@ export class FacemeshVideo {
         console.log("Hello");
 
         console.log(device.deviceId, device.label);
+        // device.
       });
     });
 
@@ -43,14 +44,14 @@ export class FacemeshVideo {
 
   initVideoObject(video: HTMLVideoElement) {
     console.log("video init!")
-    video.width = this.size.w;
-    video.height = this.size.h;
+    // video.width = this.size.w;
+    // video.height = this.size.h;
     video.autoplay = this.autoplay;
 
     this.getWebCamStream()
       .then(stream => {
         video.srcObject = stream;
-        this.inited = true;
+        // this.inited = true;
       })
       .catch(err => console.log(err));
   }

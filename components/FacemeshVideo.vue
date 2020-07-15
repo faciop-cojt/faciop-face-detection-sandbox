@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { log } from "@tensorflow/tfjs-core";
 
 export default Vue.extend({
   mounted() {
@@ -15,7 +16,9 @@ export default Vue.extend({
     this.$facemeshVideo.initVideoObject(video);
 
     video.onloadeddata = ev => {
-      this.$facecanvas.setCanvasSize(video.width, video.height);
+      this.$facecanvas.setCanvasSize(video.clientWidth, video.clientHeight);
+      console.log((<HTMLElement>video).clientWidth);
+      
       this.loop(video);
     };
   },
