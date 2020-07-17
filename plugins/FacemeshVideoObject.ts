@@ -47,6 +47,8 @@ export class FacemeshVideo {
     // video.width = this.size.w;
     // video.height = this.size.h;
     video.autoplay = this.autoplay;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
 
     this.getWebCamStream()
       .then(stream => {
